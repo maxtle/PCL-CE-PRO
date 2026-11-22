@@ -56,7 +56,7 @@
 
                     <local:MyCheckBox x:Name="CheckAutoClean" Height="22" Margin="0,18,0,0"
                                       Text="{loc:Loc Tools.MemoryOptimize.Auto.Enable}"
-                                      Checked="CheckAutoClean_Change" />
+                                      Change="CheckAutoClean_Change" />
 
                     <StackPanel x:Name="PanAutoOptions" Margin="0,16,0,0" Visibility="Collapsed">
                         <TextBlock Text="{loc:Loc Tools.MemoryOptimize.Auto.Mode}" Opacity="0.85" />
