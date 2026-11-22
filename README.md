@@ -1,5 +1,7 @@
 **简体中文**
 
+> 第一次接触这个项目？先看 [项目介绍](INTRODUCTION.md)：它是什么、改了哪些、为什么这么改。
+
 <div align="center">
 
 <img src="Plain Craft Launcher 2/Images/icon.ico" alt="Logo" width="80" height="80">
