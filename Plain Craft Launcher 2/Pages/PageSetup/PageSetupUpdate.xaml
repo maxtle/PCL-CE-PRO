@@ -70,6 +70,22 @@
                                TextWrapping="Wrap" />
                 </Grid>
             </local:MyCard>
+            <local:MyCard x:Name="CardUpdate" Margin="0,0,0,15" Title="{loc:Loc Setup.Details.Update.Title}">
+                <StackPanel Margin="25,40,25,20">
+                    <TextBlock Text="{loc:Loc Setup.Details.Update.Desc}" TextWrapping="Wrap" Opacity="0.7" />
+                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                        <local:MyButton x:Name="BtnCheckUpdate" MinWidth="120" Height="32" Padding="13,0"
+                                        ColorType="Highlight" Text="{loc:Loc Setup.Details.Update.Check}"
+                                        Click="BtnCheckUpdate_Click" />
+                        <local:MyButton x:Name="BtnOpenReleases" MinWidth="120" Height="32" Padding="13,0"
+                                        Margin="10,0,0,0" Visibility="Collapsed"
+                                        Text="{loc:Loc Setup.Details.Update.OpenReleases}"
+                                        Click="BtnOpenReleases_Click" />
+                        <TextBlock x:Name="LabUpdateStatus" VerticalAlignment="Center" Margin="15,0,0,0"
+                                   TextWrapping="Wrap" Opacity="0.7" />
+                    </StackPanel>
+                </StackPanel>
+            </local:MyCard>
             <local:MyCard x:Name="CardData" Margin="0,0,0,15" Title="{loc:Loc Setup.Details.Data.Title}">
                 <StackPanel Margin="25,40,25,20">
                     <TextBlock Text="{loc:Loc Setup.Details.Data.Desc}" TextWrapping="Wrap" Opacity="0.7"

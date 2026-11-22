@@ -3200,6 +3200,14 @@
     <sys:String x:Key="Setup.Details.Version.StartupCount">Launch Count</sys:String>
     <sys:String x:Key="Setup.Details.Version.Title">Version Information</sys:String>
     <sys:String x:Key="Setup.Details.Version.Unknown">Unknown</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Title">Check for Updates</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Desc">Fetch the latest version info from the project GitHub repository. Updates are downloaded manually and never replace the current build automatically.</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Check">Check for Updates</sys:String>
+    <sys:String x:Key="Setup.Details.Update.OpenReleases">Download</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Checking">Checking…</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Latest">You are up to date</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Failed">Check failed. Please check your network and retry.</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Available">New version available: {0}</sys:String>
 
     <!-- Setup.Update -->
 

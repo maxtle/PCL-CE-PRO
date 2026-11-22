@@ -3200,6 +3200,14 @@
     <sys:String x:Key="Setup.Details.Version.StartupCount">啟動次數</sys:String>
     <sys:String x:Key="Setup.Details.Version.Title">版本資訊</sys:String>
     <sys:String x:Key="Setup.Details.Version.Unknown">未知</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Title">檢查更新</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Desc">從專案的 GitHub 儲存庫取得最新版本資訊。更新為手動下載，不會自動取代目前程式。</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Check">檢查更新</sys:String>
+    <sys:String x:Key="Setup.Details.Update.OpenReleases">前往下載</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Checking">正在檢查…</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Latest">已是最新版本</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Failed">檢查失敗，請檢查網路後重試</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Available">發現新版本 {0}</sys:String>
 
     <!-- Setup.Update -->
 

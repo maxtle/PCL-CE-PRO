@@ -329,4 +329,48 @@ public partial class PageSetupUpdate : IPageView
 
         return allSucceeded;
     }
+    #region 检查更新
+
+    private async void BtnCheckUpdate_Click(object sender, MouseButtonEventArgs e)
+    {
+        BtnCheckUpdate.IsEnabled = false;
+        BtnOpenReleases.Visibility = Visibility.Collapsed;
+        LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.Checking");
+
+        try
+        {
+            var info = await GitHubUpdater.CheckAsync();
+            if (info is null)
+            {
+                LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.Failed");
+                return;
+            }
+
+            if (!info.HasUpdate)
+            {
+                LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.Latest");
+                Common.Log($"[Update] 已是最新版本（{GitHubUpdater.CurrentTag}）");
+                return;
+            }
+
+            LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.Available", info.LatestTag);
+            BtnOpenReleases.Visibility = Visibility.Visible;
+            Common.Log($"[Update] 发现新版本 {info.LatestTag}，当前 {GitHubUpdater.CurrentTag}");
+        }
+        catch (Exception ex)
+        {
+            Common.Log(ex, "检查更新失败");
+            LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.Failed");
+        }
+        finally
+        {
+            BtnCheckUpdate.IsEnabled = true;
+        }
+    }
+
+    private void BtnOpenReleases_Click(object sender, MouseButtonEventArgs e) =>
+        Common.OpenWebsite($"https://github.com/{GitHubUpdater.Owner}/{GitHubUpdater.Repo}/releases/latest");
+
+    #endregion
+
 }

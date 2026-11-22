@@ -3339,6 +3339,14 @@
     <sys:String x:Key="Setup.Details.Version.StartupCount">启动次数</sys:String>
     <sys:String x:Key="Setup.Details.Version.Title">版本信息</sys:String>
     <sys:String x:Key="Setup.Details.Version.Unknown">未知</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Title">检查更新</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Desc">从项目的 GitHub 仓库获取最新版本信息。更新为手动下载，不会自动替换当前程序。</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Check">检查更新</sys:String>
+    <sys:String x:Key="Setup.Details.Update.OpenReleases">前往下载</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Checking">正在检查…</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Latest">已是最新版本</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Failed">检查失败，请检查网络后重试</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Available">发现新版本 {0}</sys:String>
 
     <!-- Setup.Update -->
 
