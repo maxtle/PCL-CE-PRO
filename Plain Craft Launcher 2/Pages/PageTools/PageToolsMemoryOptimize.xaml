@@ -1,0 +1,54 @@
+﻿<local:MyPageRight x:Class="PCL.PageToolsMemoryOptimize"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:local="clr-namespace:PCL"
+                   xmlns:loc="https://ce.pclc.cc/core/localization"
+                   PanScroll="{Binding ElementName=PanBack}">
+    <local:MyScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                          x:Name="PanBack">
+        <StackPanel x:Name="PanMain" Margin="25,10">
+            <local:MyCard Margin="0,15" Title="{loc:Loc Tools.MemoryOptimize.Title}">
+                <StackPanel Margin="25,40,25,20">
+                    <TextBlock Text="{loc:Loc Tools.MemoryOptimize.Description}" TextWrapping="Wrap" />
+
+                    <Grid Margin="0,18,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="MemName" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
+                                   Margin="0,0,25,10"
+                                   Text="{loc:Loc Tools.MemoryOptimize.PhysicalMemory}" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"
+                                   Margin="0,0,0,10" x:Name="LabPhysicalMemory" />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
+                                   Margin="0,0,25,10"
+                                   Text="{loc:Loc Tools.MemoryOptimize.LauncherMemory}" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
+                                   Margin="0,0,0,10" x:Name="LabLauncherMemory" />
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"
+                                   Margin="0,0,25,0"
+                                   Text="{loc:Loc Tools.MemoryOptimize.GameMemory}" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"
+                                   x:Name="LabGameMemory" TextWrapping="Wrap" />
+                    </Grid>
+
+                    <local:MyButton x:Name="BtnOptimize" MinWidth="140" Margin="0,20,0,0"
+                                    HorizontalAlignment="Left" ColorType="Highlight"
+                                    Text="{loc:Loc Tools.MemoryOptimize.Optimize}"
+                                    Click="BtnOptimize_Click" />
+
+                    <TextBlock x:Name="LabResult" Margin="0,12,0,0" TextWrapping="Wrap" Opacity="0.75" />
+                </StackPanel>
+            </local:MyCard>
+        </StackPanel>
+    </local:MyScrollViewer>
+</local:MyPageRight>
