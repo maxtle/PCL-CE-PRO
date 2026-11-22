@@ -3208,6 +3208,12 @@
     <sys:String x:Key="Setup.Details.Update.Latest">已是最新版本</sys:String>
     <sys:String x:Key="Setup.Details.Update.Failed">檢查失敗，請檢查網路後重試</sys:String>
     <sys:String x:Key="Setup.Details.Update.Available">發現新版本 {0}</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Apply">立即更新</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Apply.Confirm.Title">自動更新</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Apply.Confirm">將下載 PCL-CE PRO {0}（約 188 MB），下載完成後自動取代目前程式並重新啟動啟動器。&#xA;&#xA;取代過程中請勿手動關閉啟動器；若取代失敗，原版本會保留在 PCL 目錄中。&#xA;&#xA;是否繼續？</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Downloading">正在下載更新… {0}%</sys:String>
+    <sys:String x:Key="Setup.Details.Update.DownloadFailed">下載失敗，請檢查網路，或改用「前往下載」手動安裝</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Restarting">更新包已就緒，正在重新啟動以完成取代…</sys:String>
 
     <!-- Setup.Update -->
 
@@ -3639,4 +3645,15 @@
     <sys:String x:Key="Setup.FirstRun.Next">下一步</sys:String>
     <sys:String x:Key="Setup.FirstRun.Skip">跳過</sys:String>
     <sys:String x:Key="Setup.FirstRun.Finish">完成</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Title">智慧清理</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Description">達到設定條件後自動清理各行程的工作集，把閒置的實體記憶體歸還系統。清理時會短暫將記憶體頁換出到磁碟，過於頻繁反而會降低效能，建議閾值不低於 80% 或間隔不少於 30 分鐘。僅在偵測到使用者閒置時執行。</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Enable">啟用智慧清理</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Mode">觸發方式</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Mode.Threshold">依記憶體佔用</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Mode.Interval">依時間間隔</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.ThresholdValue">記憶體佔用達到 {0}% 時清理</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Interval">清理間隔</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Minutes">{0} 分鐘</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.LastClean">上次自動清理：{0}</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.NeverCleaned">尚未觸發過自動清理。條件滿足且使用者閒置時會自動執行。</sys:String>
 </ResourceDictionary>

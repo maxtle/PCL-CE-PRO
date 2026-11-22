@@ -77,6 +77,10 @@
                         <local:MyButton x:Name="BtnCheckUpdate" MinWidth="120" Height="32" Padding="13,0"
                                         ColorType="Highlight" Text="{loc:Loc Setup.Details.Update.Check}"
                                         Click="BtnCheckUpdate_Click" />
+                        <local:MyButton x:Name="BtnApplyUpdate" MinWidth="120" Height="32" Padding="13,0"
+                                        Margin="10,0,0,0" Visibility="Collapsed"
+                                        Text="{loc:Loc Setup.Details.Update.Apply}"
+                                        Click="BtnApplyUpdate_Click" />
                         <local:MyButton x:Name="BtnOpenReleases" MinWidth="120" Height="32" Padding="13,0"
                                         Margin="10,0,0,0" Visibility="Collapsed"
                                         Text="{loc:Loc Setup.Details.Update.OpenReleases}"

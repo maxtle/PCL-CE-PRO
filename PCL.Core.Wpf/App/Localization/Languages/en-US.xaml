@@ -3313,6 +3313,12 @@
     <sys:String x:Key="Setup.Details.Update.Latest">You are up to date</sys:String>
     <sys:String x:Key="Setup.Details.Update.Failed">Check failed. Please check your network and retry.</sys:String>
     <sys:String x:Key="Setup.Details.Update.Available">New version available: {0}</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Apply">Update now</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Apply.Confirm.Title">Automatic update</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Apply.Confirm">PCL-CE PRO {0} (about 188 MB) will be downloaded, then the current program will be replaced and the launcher restarted automatically.&#xA;&#xA;Do not close the launcher during the replacement. If it fails, the original version stays in the PCL folder.&#xA;&#xA;Continue?</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Downloading">Downloading update… {0}%</sys:String>
+    <sys:String x:Key="Setup.Details.Update.DownloadFailed">Download failed. Check your network, or use "Download" to install manually.</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Restarting">Update ready, restarting to complete the replacement…</sys:String>
 
     <!-- Setup.Update -->
 
@@ -3746,4 +3752,15 @@
     <sys:String x:Key="Setup.FirstRun.Next">Next</sys:String>
     <sys:String x:Key="Setup.FirstRun.Skip">Skip</sys:String>
     <sys:String x:Key="Setup.FirstRun.Finish">Finish</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Title">Smart Cleanup</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Description">Automatically trims the working set of running processes once the configured condition is met, returning idle physical memory to the system. Trimming swaps memory pages out to disk, so doing it too often actually hurts performance: keep the threshold at 80% or above, or the interval at 30 minutes or longer. Runs only when the user is idle.</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Enable">Enable smart cleanup</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Mode">Trigger</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Mode.Threshold">By memory usage</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Mode.Interval">By time interval</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.ThresholdValue">Clean when memory usage reaches {0}%</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Interval">Cleanup interval</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Minutes">{0} min</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.LastClean">Last automatic cleanup: {0}</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.NeverCleaned">No automatic cleanup has run yet. It runs once conditions are met and the user is idle.</sys:String>
 </ResourceDictionary>

@@ -1,5 +1,9 @@
+﻿using System.IO;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
+using PCL.Core.App;
 using PCL.Core.IO.Net.Http;
 using PCL.Core.Utils;
 
@@ -21,7 +25,7 @@ public static partial class GitHubUpdater
     /// <summary>
     ///     当前构建对应的 Release 标签。每次发版需同步修改此处，用于判断是否已是最新。
     /// </summary>
-    public const string CurrentTag = "v2.15.1-pro.3";
+    public const string CurrentTag = "v2.15.1-pro.4";
 
     /// <summary>一次检查的结果。</summary>
     /// <param name="HasUpdate">是否存在比当前更新的版本。</param>
@@ -72,6 +76,79 @@ public static partial class GitHubUpdater
         catch (Exception ex)
         {
             Common.Log(ex, "检查 GitHub 更新失败", Common.LogLevel.Developer);
+            return null;
+        }
+    }
+
+    /// <summary>
+    ///     下载更新包到更新器约定的位置（<c>程序目录\PCL\PCL-CE PRO.exe</c>），
+    ///     供 <c>UpdateManager.UpdateRestart</c> 启动新版本完成自替换。
+    /// </summary>
+    /// <param name="url">安装包下载地址。</param>
+    /// <param name="expectedSize">期望大小（字节），用于下载后校验，0 表示不校验。</param>
+    /// <param name="progress">下载进度回调（0–100）。</param>
+    /// <param name="token">取消标记。</param>
+    /// <returns>下载完成的文件路径；失败返回 null，原因写入日志。</returns>
+    public static async Task<string?> DownloadUpdateAsync(
+        string url,
+        long expectedSize,
+        IProgress<double>? progress = null,
+        CancellationToken token = default)
+    {
+        try
+        {
+            var targetDir = Path.Combine(Basics.ExecutableDirectory, "PCL");
+            Directory.CreateDirectory(targetDir);
+            var targetPath = Path.Combine(targetDir, "PCL-CE PRO.exe");
+
+            // 先删除残留，避免与旧文件混合写入
+            if (File.Exists(targetPath))
+                File.Delete(targetPath);
+
+            Common.Log($"[Update] 开始下载更新包：{url}");
+
+            using var response = await HttpRequest.Create(url).SendAsync().ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+
+            // 总长度以调用方给出的期望值为准（来自 Release 资产大小），拿不到时进度按 0 处理
+            var total = expectedSize;
+            await using (var source = await response.AsStreamAsync().ConfigureAwait(false))
+            await using (var file = new FileStream(targetPath, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                var buffer = new byte[81920];
+                long received = 0;
+                int read;
+                while ((read = await source.ReadAsync(buffer, token).ConfigureAwait(false)) > 0)
+                {
+                    await file.WriteAsync(buffer.AsMemory(0, read), token).ConfigureAwait(false);
+                    received += read;
+                    if (total > 0)
+                        progress?.Report(received * 100d / total);
+                }
+            }
+
+            var actual = new FileInfo(targetPath).Length;
+            if (expectedSize > 0 && actual != expectedSize)
+            {
+                Common.Log($"[Update] 下载大小不符，期望 {expectedSize} 实际 {actual}，已删除");
+                try
+                {
+                    File.Delete(targetPath);
+                }
+                catch
+                {
+                    // 忽略清理失败
+                }
+
+                return null;
+            }
+
+            Common.Log($"[Update] 更新包下载完成：{actual} 字节");
+            return targetPath;
+        }
+        catch (Exception ex)
+        {
+            Common.Log(ex, "[Update] 下载更新包失败");
             return null;
         }
     }

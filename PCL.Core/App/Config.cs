@@ -105,6 +105,30 @@ public static partial class Config
         // [ConfigItem<int>("ToolUpdateAlpha", 0, ConfigSource.SharedEncrypt)] public partial int Alpha { get; set; }
         [ConfigItem<bool>("ToolUpdateRelease", false)] public partial bool ReleaseNotification { get; set; }
         [ConfigItem<bool>("ToolUpdateSnapshot", false)] public partial bool SnapshotNotification { get; set; }
+
+        /// <summary>
+        /// 是否启用智能内存清理。
+        /// </summary>
+        [ConfigItem<bool>("ToolAutoMemoryClean", false, ConfigSource.Local)]
+        public partial bool AutoMemoryCleanEnabled { get; set; }
+
+        /// <summary>
+        /// 智能清理触发模式：0 按内存占用，1 按时间间隔。
+        /// </summary>
+        [ConfigItem<int>("ToolAutoMemoryCleanMode", 0, ConfigSource.Local)]
+        public partial int AutoMemoryCleanMode { get; set; }
+
+        /// <summary>
+        /// 智能清理的内存占用阈值（百分比，50–95）。
+        /// </summary>
+        [ConfigItem<int>("ToolAutoMemoryCleanThreshold", 85, ConfigSource.Local)]
+        public partial int AutoMemoryCleanThreshold { get; set; }
+
+        /// <summary>
+        /// 智能清理的时间间隔（分钟，5–120）。
+        /// </summary>
+        [ConfigItem<int>("ToolAutoMemoryCleanInterval", 30, ConfigSource.Local)]
+        public partial int AutoMemoryCleanInterval { get; set; }
     }
 
     /// <summary>

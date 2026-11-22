@@ -3347,6 +3347,12 @@
     <sys:String x:Key="Setup.Details.Update.Latest">已是最新版本</sys:String>
     <sys:String x:Key="Setup.Details.Update.Failed">检查失败，请检查网络后重试</sys:String>
     <sys:String x:Key="Setup.Details.Update.Available">发现新版本 {0}</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Apply">立即更新</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Apply.Confirm.Title">自动更新</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Apply.Confirm">将下载 PCL-CE PRO {0}（约 188 MB），下载完成后自动替换当前程序并重启启动器。&#xA;&#xA;替换过程中请勿手动关闭启动器；若替换失败，原版本会保留在 PCL 目录中。&#xA;&#xA;是否继续？</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Downloading">正在下载更新… {0}%</sys:String>
+    <sys:String x:Key="Setup.Details.Update.DownloadFailed">下载失败，请检查网络，或改用「前往下载」手动安装</sys:String>
+    <sys:String x:Key="Setup.Details.Update.Restarting">更新包已就绪，正在重启以完成替换…</sys:String>
 
     <!-- Setup.Update -->
 
@@ -3462,6 +3468,17 @@
     <sys:String x:Key="Tools.MemoryOptimize.Optimizing">正在优化，请稍候……</sys:String>
     <sys:String x:Key="Tools.MemoryOptimize.Result">内存优化完成，可用内存增加了约 {0}。</sys:String>
     <sys:String x:Key="Tools.MemoryOptimize.Failed">内存优化失败，请查看日志了解详情。</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Title">智能清理</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Description">达到设定条件后自动清理各进程的工作集，把闲置的物理内存归还系统。清理时会短暂将内存页换出到磁盘，过于频繁反而会降低性能，建议阈值不低于 80% 或间隔不少于 30 分钟。仅在检测到用户空闲时执行。</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Enable">启用智能清理</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Mode">触发方式</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Mode.Threshold">按内存占用</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Mode.Interval">按时间间隔</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.ThresholdValue">内存占用达到 {0}% 时清理</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Interval">清理间隔</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.Minutes">{0} 分钟</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.LastClean">上次自动清理：{0}</sys:String>
+    <sys:String x:Key="Tools.MemoryOptimize.Auto.NeverCleaned">尚未触发过自动清理。条件满足且用户空闲时会自动执行。</sys:String>
 
     <!-- Tools.GameLink -->
 

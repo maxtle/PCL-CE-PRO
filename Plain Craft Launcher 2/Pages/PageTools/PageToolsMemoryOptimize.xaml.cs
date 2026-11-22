@@ -1,9 +1,11 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using PCL.Core.App;
 using PCL.Core.App.Essentials;
 using PCL.Core.App.Localization;
 using PCL.Core.Utils.OS;
@@ -12,13 +14,23 @@ namespace PCL;
 
 public partial class PageToolsMemoryOptimize : IPageView
 {
+    private static readonly int[] IntervalMinutes = [5, 10, 15, 30, 60, 120];
+
+    /// <summary>初始化或按配置回填控件时为 true，避免把回填动作当成用户修改写回配置。</summary>
+    private bool _autoInitializing;
+
     public PageToolsMemoryOptimize()
     {
         InitializeComponent();
+        InitAutoCleanControls();
         RefreshMemoryInfo();
     }
 
-    public void OnNavigatedTo(object? parameter) => RefreshMemoryInfo();
+    public void OnNavigatedTo(object? parameter)
+    {
+        RefreshMemoryInfo();
+        UpdateAutoStatus();
+    }
 
     public void OnNavigatedFrom()
     {
@@ -184,4 +196,109 @@ public partial class PageToolsMemoryOptimize : IPageView
     }
 
     #endregion
+    #region 智能清理
+
+    private void InitAutoCleanControls()
+    {
+        _autoInitializing = true;
+        try
+        {
+            CheckAutoClean.Checked = Config.Tool.AutoMemoryCleanEnabled;
+
+            ComboAutoMode.SelectedIndex = Math.Clamp(Config.Tool.AutoMemoryCleanMode, 0, 1);
+
+            // 滑块本身范围 0–45，实际阈值 = 50 + Value，从而把可选区间限制在 50%–95%
+            SliderThreshold.Value =
+                Math.Clamp(Config.Tool.AutoMemoryCleanThreshold, 50, 95) - 50;
+
+            ComboInterval.ItemsSource = IntervalMinutes
+                .Select(minutes => Lang.Text("Tools.MemoryOptimize.Auto.Minutes", minutes))
+                .ToList();
+            var intervalIndex = Array.IndexOf(IntervalMinutes, Config.Tool.AutoMemoryCleanInterval);
+            ComboInterval.SelectedIndex = intervalIndex >= 0 ? intervalIndex : Array.IndexOf(IntervalMinutes, 30);
+
+            UpdateAutoVisibility();
+            UpdateThresholdLabel();
+            UpdateAutoStatus();
+        }
+        finally
+        {
+            _autoInitializing = false;
+        }
+    }
+
+    private void UpdateAutoVisibility()
+    {
+        var enabled = CheckAutoClean.Checked == true;
+        PanAutoOptions.Visibility = enabled ? Visibility.Visible : Visibility.Collapsed;
+
+        var byInterval = ComboAutoMode.SelectedIndex == 1;
+        PanThreshold.Visibility = byInterval ? Visibility.Collapsed : Visibility.Visible;
+        PanInterval.Visibility = byInterval ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    private void UpdateThresholdLabel()
+    {
+        // Value 为 0–45，显示时加回 50
+        LabThreshold.Text = Lang.Text("Tools.MemoryOptimize.Auto.ThresholdValue", 50 + SliderThreshold.Value);
+    }
+
+    private void UpdateAutoStatus()
+    {
+        if (CheckAutoClean.Checked != true)
+        {
+            LabAutoStatus.Text = "";
+            return;
+        }
+
+        var last = AutoMemoryCleaner.LastCleanTime;
+        LabAutoStatus.Text = last == DateTime.MinValue
+            ? Lang.Text("Tools.MemoryOptimize.Auto.NeverCleaned")
+            : Lang.Text("Tools.MemoryOptimize.Auto.LastClean", last.ToLocalTime().ToString("HH:mm:ss"));
+    }
+
+    private void CheckAutoClean_Change(object senderRaw, bool user)
+    {
+        if (_autoInitializing)
+            return;
+
+        var enabled = CheckAutoClean.Checked == true;
+        Config.Tool.AutoMemoryCleanEnabled = enabled;
+        UpdateAutoVisibility();
+        UpdateAutoStatus();
+        AutoMemoryCleaner.Apply();
+        Common.Log($"[AutoMemoryClean] 用户{(enabled ? "启用" : "关闭")}智能清理");
+    }
+
+    private void ComboAutoMode_Change(object senderRaw, SelectionChangedEventArgs e)
+    {
+        if (_autoInitializing || ComboAutoMode.SelectedIndex < 0)
+            return;
+
+        Config.Tool.AutoMemoryCleanMode = ComboAutoMode.SelectedIndex;
+        UpdateAutoVisibility();
+        AutoMemoryCleaner.Apply();
+    }
+
+    private void SliderThreshold_Change(object senderRaw, bool user)
+    {
+        UpdateThresholdLabel();
+        if (_autoInitializing)
+            return;
+
+        Config.Tool.AutoMemoryCleanThreshold = 50 + SliderThreshold.Value;
+        AutoMemoryCleaner.Apply();
+    }
+
+    private void ComboInterval_Change(object senderRaw, SelectionChangedEventArgs e)
+    {
+        if (_autoInitializing || ComboInterval.SelectedIndex < 0)
+            return;
+
+        Config.Tool.AutoMemoryCleanInterval = IntervalMinutes[ComboInterval.SelectedIndex];
+        AutoMemoryCleaner.Apply();
+    }
+
+    #endregion
+
 }

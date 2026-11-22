@@ -49,6 +49,42 @@
                     <TextBlock x:Name="LabResult" Margin="0,12,0,0" TextWrapping="Wrap" Opacity="0.75" />
                 </StackPanel>
             </local:MyCard>
+            <local:MyCard Margin="0,0,0,15" Title="{loc:Loc Tools.MemoryOptimize.Auto.Title}">
+                <StackPanel Margin="25,40,25,20">
+                    <TextBlock Text="{loc:Loc Tools.MemoryOptimize.Auto.Description}"
+                               TextWrapping="Wrap" Opacity="0.75" />
+
+                    <local:MyCheckBox x:Name="CheckAutoClean" Height="22" Margin="0,18,0,0"
+                                      Text="{loc:Loc Tools.MemoryOptimize.Auto.Enable}"
+                                      Checked="CheckAutoClean_Change" />
+
+                    <StackPanel x:Name="PanAutoOptions" Margin="0,16,0,0" Visibility="Collapsed">
+                        <TextBlock Text="{loc:Loc Tools.MemoryOptimize.Auto.Mode}" Opacity="0.85" />
+                        <local:MyComboBox x:Name="ComboAutoMode" Height="32" Width="250"
+                                          HorizontalAlignment="Left" Margin="0,9,0,0"
+                                          SelectionChanged="ComboAutoMode_Change">
+                            <local:MyComboBoxItem Content="{loc:Loc Tools.MemoryOptimize.Auto.Mode.Threshold}" />
+                            <local:MyComboBoxItem Content="{loc:Loc Tools.MemoryOptimize.Auto.Mode.Interval}" />
+                        </local:MyComboBox>
+
+                        <StackPanel x:Name="PanThreshold" Margin="0,18,0,0">
+                            <TextBlock x:Name="LabThreshold" Opacity="0.85" />
+                            <local:MySlider x:Name="SliderThreshold" MaxValue="45" ValueByKey="1"
+                                            Width="270" HorizontalAlignment="Left" Margin="0,9,0,0"
+                                            Change="SliderThreshold_Change" />
+                        </StackPanel>
+
+                        <StackPanel x:Name="PanInterval" Margin="0,18,0,0" Visibility="Collapsed">
+                            <TextBlock Text="{loc:Loc Tools.MemoryOptimize.Auto.Interval}" Opacity="0.85" />
+                            <local:MyComboBox x:Name="ComboInterval" Height="32" Width="250"
+                                              HorizontalAlignment="Left" Margin="0,9,0,0"
+                                              SelectionChanged="ComboInterval_Change" />
+                        </StackPanel>
+
+                        <TextBlock x:Name="LabAutoStatus" Margin="0,14,0,0" TextWrapping="Wrap" Opacity="0.7" />
+                    </StackPanel>
+                </StackPanel>
+            </local:MyCard>
         </StackPanel>
     </local:MyScrollViewer>
 </local:MyPageRight>

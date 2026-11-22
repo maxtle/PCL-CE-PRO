@@ -335,6 +335,8 @@ public partial class PageSetupUpdate : IPageView
     {
         BtnCheckUpdate.IsEnabled = false;
         BtnOpenReleases.Visibility = Visibility.Collapsed;
+        BtnApplyUpdate.Visibility = Visibility.Collapsed;
+        _pendingUpdate = null;
         LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.Checking");
 
         try
@@ -353,7 +355,9 @@ public partial class PageSetupUpdate : IPageView
                 return;
             }
 
+            _pendingUpdate = info;
             LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.Available", info.LatestTag);
+            BtnApplyUpdate.Visibility = info.DownloadUrl is null ? Visibility.Collapsed : Visibility.Visible;
             BtnOpenReleases.Visibility = Visibility.Visible;
             Common.Log($"[Update] 发现新版本 {info.LatestTag}，当前 {GitHubUpdater.CurrentTag}");
         }
@@ -373,4 +377,64 @@ public partial class PageSetupUpdate : IPageView
 
     #endregion
 
+    /// <summary>最近一次检查到的可更新版本，为空表示当前没有可应用的更新。</summary>
+    private GitHubUpdater.UpdateInfo? _pendingUpdate;
+
+    /// <summary>
+    ///     自动更新：下载新版本到更新器约定位置，交由 UpdateManager 完成自替换与重启。
+    /// </summary>
+    private async void BtnApplyUpdate_Click(object sender, MouseButtonEventArgs e)
+    {
+        var info = _pendingUpdate;
+        if (info?.DownloadUrl is null)
+            return;
+
+        var confirm = DialogCompat.ShowMessageBox(
+            Lang.Text("Setup.Details.Update.Apply.Confirm", info.LatestTag),
+            Lang.Text("Setup.Details.Update.Apply.Confirm.Title"),
+            Lang.Text("Common.Action.Confirm"),
+            Lang.Text("Common.Action.Cancel"));
+        if (confirm != 1)
+            return;
+
+        BtnApplyUpdate.IsEnabled = false;
+        BtnCheckUpdate.IsEnabled = false;
+        BtnOpenReleases.Visibility = Visibility.Collapsed;
+        LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.Downloading", 0);
+
+        try
+        {
+            var progress = new Progress<double>(percent =>
+                LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.Downloading", (int)percent));
+
+            var expectedSize = info.AssetSizeMb is { } mb ? (long)(mb * 1024 * 1024) : 0L;
+            var path = await GitHubUpdater.DownloadUpdateAsync(
+                info.DownloadUrl, expectedSize, progress);
+
+            if (path is null)
+            {
+                LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.DownloadFailed");
+                BtnApplyUpdate.IsEnabled = true;
+                BtnCheckUpdate.IsEnabled = true;
+                BtnOpenReleases.Visibility = Visibility.Visible;
+                return;
+            }
+
+            LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.Restarting");
+            Common.Log("[Update] 更新包就绪，标记待更新并走正常退出流程");
+
+            // 走原版的标准路径：标记待更新 → EndProgram。
+            // EndProgramForce 检测到该标记后会启动更新器完成替换，
+            // 同时 EndProgram 本身会检查未完成的下载任务，避免更新打断下载。
+            UpdateManager.isUpdateWaitingRestart = true;
+            Launcher.frmMain?.EndProgram(true);
+        }
+        catch (Exception ex)
+        {
+            Common.Log(ex, "[Update] 应用更新失败");
+            LabUpdateStatus.Text = Lang.Text("Setup.Details.Update.DownloadFailed");
+            BtnApplyUpdate.IsEnabled = true;
+            BtnCheckUpdate.IsEnabled = true;
+        }
+    }
 }

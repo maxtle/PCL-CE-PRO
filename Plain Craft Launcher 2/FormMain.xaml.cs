@@ -363,6 +363,9 @@ public partial class FormMain
 
         // 首次使用向导
         ShowFirstRunGuideIfNeeded();
+
+        // 按配置启动智能内存清理（未启用时内部直接返回，不产生定时器开销）
+        AutoMemoryCleaner.Apply();
     }
 
     // 应用磨砂玻璃（系统级亚克力）效果
@@ -945,6 +948,7 @@ public partial class FormMain
     // 关闭
     private void FormMain_Closing(object sender, CancelEventArgs e)
     {
+        AutoMemoryCleaner.Stop();
         EndProgram(true);
         e.Cancel = true;
     }
