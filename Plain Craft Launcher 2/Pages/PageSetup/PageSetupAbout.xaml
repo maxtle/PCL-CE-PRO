@@ -97,6 +97,13 @@
                         local:CustomEventService.EventData="https://github.com/PCL-Community"
                         local:CustomEventService.EventType="OpenUrl"
                         Text="{loc:Loc Setup.About.GitHubHome}" />
+                    <local:MyButton
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Height="35"
+                        local:CustomEventService.EventData="https://github.com/maxtle/PCL-CE-PRO"
+                        local:CustomEventService.EventType="OpenUrl"
+                        Text="{loc:Loc Setup.About.SourceCode}" />
                 </Grid>
             </local:MyCard>
             <local:MyCard Margin="0,0,0,15" Title="{loc:Loc Setup.About.SpecialThanks.Title}">
@@ -442,7 +449,7 @@
                         <local:MyButton
                             Margin="0,0,20,0"
                             ColorType="Highlight"
-                            local:CustomEventService.EventData="https://github.com/PCL-Community/PCL2-CE"
+                            local:CustomEventService.EventData="https://github.com/maxtle/PCL-CE-PRO"
                             local:CustomEventService.EventType="OpenUrl"
                             Padding="13,0"
                             Text="{loc:Loc Setup.About.Legal.CommunitySource}" />

@@ -1,4 +1,4 @@
-using PCL.Core.App;
+﻿using PCL.Core.App;
 using PCL.Core.Logging;
 using PCL.Core.Utils.Exts;
 using System;
@@ -26,7 +26,7 @@ public static class HttpSenderExtension
             if(addMetedata)
             {
                 request
-                    .WithHeader("User-Agent", $"PCL-Community/PCL2-CE/{Basics.VersionName} (pclc.cc)")
+                    .WithHeader("User-Agent", $"PCL-CE-PRO/{Basics.VersionName} (github.com/maxtle/PCL-CE-PRO)")
                     .WithHeader("Referer", $"https://{Basics.VersionCode}.ce.open.pcl2.server/");
             }
 

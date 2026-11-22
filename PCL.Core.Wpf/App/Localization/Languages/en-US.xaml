@@ -3656,9 +3656,9 @@
     <sys:String x:Key="Update.Action">Update</sys:String>
     <sys:String x:Key="Update.Available">A new launcher version is available ({0} -&gt; {1})&#xA;Update now?</sys:String>
     <sys:String x:Key="Update.Check.Failed">Unable to get latest version information. Please check your network connection.</sys:String>
-    <sys:String x:Key="Update.CommunityNotice.Body">You are using PCL CE from PCL-Community. Please DO NOT report issues to the original repository!&#xA;PCL-Community and its members are not affiliated with LTCat (龙腾猫跃), and do not guarantee your usage.&#xA;&#xA;If you downloaded PCL CE by mistake, we recommend using the original PCL instead.&#xA;If you downloaded PCL CE by mistake, we recommend using the original PCL instead.&#xA;If you downloaded PCL CE by mistake, we recommend using the original PCL instead.&#xA;&#xA;Differences from the original version:&#xA;- Themes: only some fixed blue themes; no plans to add new themes.&#xA;- Toolbox: some content from the original version is missing (Echo Cave, Don't Click).&#xA;&#xA;This message will be shown once after a launcher update.</sys:String>
+    <sys:String x:Key="Update.CommunityNotice.Body">You are using PCL-CE PRO, a third-party modified build based on PCL CE. It is NOT an official release.&#xA;&#xA;Please report issues to:&#xA;https://github.com/maxtle/PCL-CE-PRO/issues&#xA;&#xA;This project is not affiliated with LTCat (the original PCL author) or PCL Community, does not represent them, and provides no guarantee for your use.&#xA;&#xA;If the game itself misbehaves, check mods or modpacks first.&#xA;&#xA;This notice is shown once after a launcher update.</sys:String>
     <sys:String x:Key="Update.CommunityNotice.Confirm">I understand</sys:String>
-    <sys:String x:Key="Update.CommunityNotice.Title">PCL CE notice</sys:String>
+    <sys:String x:Key="Update.CommunityNotice.Title">About PCL-CE PRO</sys:String>
     <sys:String x:Key="Update.Error.FetchFailed">Failed to get launcher update. Please check your network connection.</sys:String>
     <sys:String x:Key="Update.Error.FileNotFound">Update file not found</sys:String>
     <sys:String x:Key="Update.Error.OperationFailed">An update operation failed. See the details below.</sys:String>
