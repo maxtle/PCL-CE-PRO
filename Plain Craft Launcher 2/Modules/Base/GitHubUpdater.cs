@@ -25,7 +25,7 @@ public static partial class GitHubUpdater
     /// <summary>
     ///     当前构建对应的 Release 标签。每次发版需同步修改此处，用于判断是否已是最新。
     /// </summary>
-    public const string CurrentTag = "v2.001.86";
+    public const string CurrentTag = "v2.001.99";
 
     /// <summary>一次检查的结果。</summary>
     /// <param name="HasUpdate">是否存在比当前更新的版本。</param>
